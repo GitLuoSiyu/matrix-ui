@@ -1,0 +1,39 @@
+var threeNumForTwo = {
+    numFormat: function(num) {
+      //num = parseInt(num);
+      
+      var num = num + '';
+      var d = '';
+      if (num.slice(0, 1) == '-'){
+        d = num.slice(0, 1);
+        num = num.slice(1);
+      }
+      var len = num.length;
+      var index = num.indexOf('.');
+      if (index == -1) {
+        num = num + '.00';
+      } else if ((index + 2) == len) {
+        num = num + '0';
+      }
+      var index = num.indexOf('.'); // 字符出现的位置
+      var num2 = num.slice(-3);
+      num = num.slice(0,index)
+      var result = '';
+      while (num.length > 3) {
+        result = ',' + num.slice(-3) + result;
+        num = num.slice(0, num.length - 3);
+      }
+      if (num) {
+        result = num + result;
+      }
+      var data = d + (result + num2)
+      if(data.indexOf('.00') != -1) {
+        data = data.substring(0,data.indexOf('.00'));
+      }
+      return data;
+    }
+  }
+   
+  module.exports = {
+    numFormat: threeNumForTwo.numFormat //暴露接口调用
+  }
